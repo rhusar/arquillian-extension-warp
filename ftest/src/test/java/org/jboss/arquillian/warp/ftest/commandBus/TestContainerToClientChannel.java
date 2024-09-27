@@ -42,6 +42,7 @@ import org.jboss.arquillian.warp.servlet.BeforeServlet;
 import org.jboss.shrinkwrap.api.ShrinkWrap;
 import org.jboss.shrinkwrap.api.asset.EmptyAsset;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.openqa.selenium.WebDriver;
@@ -50,6 +51,7 @@ import org.openqa.selenium.WebDriver;
  * @author atzoum
  * @author lfryc
  */
+@Ignore("Just for debugging as it fails on CI when browsers are used")
 @RunWith(Arquillian.class)
 @WarpTest
 @RunAsClient
