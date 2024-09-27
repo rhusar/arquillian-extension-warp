@@ -17,17 +17,21 @@ jobs:
       matrix:
         os:
           - ubuntu-latest
-        # Keep this list as: all supported LTS JDKs, the latest GA JDK, and the latest EA JDK (optional).
+          - macos-latest
+          - windows-latest
         java:
+          # Keep this list as: all supported LTS JDKs, the latest GA JDK, and the latest EA JDK (optional).
           - 11
           - 17
           - 21
           - 23
         container:
           - wildfly-managed
-          # GlassFish 5 is not compatible with JDK 9 and newer
-          # - glassfish-managed
           - tomee-managed
+        browser:
+          - htmlUnit
+          - chrome
+          - firefox
     steps:
       - name: Checkout
         uses: actions/checkout@v3
@@ -38,9 +42,9 @@ jobs:
           java-version: ${{ matrix.java }}
           cache: maven
       - name: Build with Maven
-        run: mvn --batch-mode --no-transfer-progress --activate-profiles ${{ matrix.container }} verify
+        run: mvn --batch-mode --no-transfer-progress --activate-profiles ${{ matrix.container }} --define arquillian.drone.browser=${{ matrix.browser }} verify
       - uses: actions/upload-artifact@v3
         if: failure()
         with:
-          name: surefire-${{ matrix.os }}-${{ matrix.java }}-${{ matrix.container }}
+          name: surefire-${{ matrix.os }}-${{ matrix.java }}-${{ matrix.container }}-${{ matrix.browser }}
           path: '**/surefire-reports/*.txt'

@@ -283,6 +283,20 @@
 
     <profile>
       <!--While executing the tests, Drone uses a locally installed Chrome browser. Combine this profile with any server profile, e.g. "mvnw clean install -Pwildfly-remote,browser-chrome"-->
+      <id>browser-htmlUnit</id>
+      <activation>
+        <property>
+          <name>browser</name>
+          <value>htmlUnit</value>
+        </property>
+      </activation>
+      <properties>
+        <arquillian.drone.browser>htmlUnit</arquillian.drone.browser>
+      </properties>
+    </profile>
+
+    <profile>
+      <!--While executing the tests, Drone uses a locally installed Chrome browser. Combine this profile with any server profile, e.g. "mvnw clean install -Pwildfly-remote,browser-chrome"-->
       <id>browser-chrome</id>
       <activation>
         <property>
