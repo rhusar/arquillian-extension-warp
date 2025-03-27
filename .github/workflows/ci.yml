@@ -29,9 +29,8 @@ jobs:
           - glassfish-managed
           - tomee-managed
         exclude:
-           # TomEE 10 requires Java 17.
-           - os: ubuntu-latest
-             java: 11
+           # TomEE 10 requires Java 17
+           - java: 11
              container: tomee-managed
     steps:
       - name: Checkout
